@@ -7,23 +7,23 @@ export default function GoblinForm(props) {
       Note that you don't need to define an anonymous function--you can just name the submitGoblin prop here and it will work.
       Take a minute to try and puzzle out why that is: how is this function different from other functions, 
       where you do need to create an anonymous function in the `onClick` or `onSubmit` spot? */}
-      <form className='goblin-form'>
+      <form className='goblin-form' onSubmit={props.submitGoblin}>
         <label>
             Name
           {/* onChange, use the prop setGoblinFormName to set the parent state */}
-          <input required value={props.goblinFormName} />
+          <input required value={props.goblinFormName} onChange={(e) => props.setGoblinFormName(e.target.value)}/>
           {/* note that we're controlling the input's value from parent state */}
         </label>
         <label>
             HP
           {/* onChange, use the prop setGoblinFormHP to set the parent state */}
-          <input required type="number" value={props.goblinFormHP} />
+          <input required type="number" value={props.goblinFormHP} onChange={(e) => props.setGoblinFormHP(e.target.value)}/>
           {/* note that we're controlling the input's value from parent state */}
         </label>
         <label>
             Color
           {/* onChange, use the prop setGoblinFormColor to set the parent state */}
-          <select required value={props.goblinFormColor}>
+          <select required value={props.goblinFormColor} onChange={(e) => props.setGoblinFormColor(e.target.value)}>
             {/* note that we're controlling the input's value from parent state */}
             <option value="lightgreen">Green</option>
             <option value="lightblue">Blue</option>
