@@ -54,6 +54,7 @@ function App() {
     setFilteredGoblins([]);
   }
 
+  // eslint-disable-next-line
   useEffect(() => handleFilterGoblins(filter), [filter, allGoblins]);
 
   function handleFilterGoblins(search) {
