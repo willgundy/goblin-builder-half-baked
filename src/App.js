@@ -14,15 +14,26 @@ function App() {
       goblinFormColor, which is how we track the user input for the current color of the goblin in the form
 */
   const [allGoblins, setAllGoblins] = useState([]);
+  const [filteredGoblins, setFilteredGoblins] = useState([]);
+  const [goblinFormName, setGoblinFormName] = useState('');
+  const [goblinFormHP, setGoblinFormHP] = useState('');
+  const [goblinFormColor, setGoblinFormColor] = useState('');
   
   function submitGoblin(e) {
     e.preventDefault();
     
     // on submit, make a new goblin object with a name that comes from the form state, an hp that comes from the form state, and a color that comes from the form state
-
+    const newGoblin = {
+      goblinFormName,
+      goblinFormHP,
+      goblinFormColor
+    };
     // update the allGoblins array. Add the new goblin to the allGoblins array immutably.
-    
+    setAllGoblins(...allGoblins, newGoblin);
     // clear out the goblin form state items by setting them to empty strings. This will cause the form to reset in the UI.
+    setGoblinFormName('');
+    setGoblinFormHP('');
+    setGoblinFormColor('Orange');
   }
 
   function handleDeleteGoblin(name) {
@@ -45,6 +56,9 @@ function App() {
     <div className="App">
       <div className='current-goblin quarter'>
         <Goblin goblin={{
+          name: goblinFormName, 
+          color: goblinFormColor,
+          hp: goblinFormHP
           /* 
             use the goblin form state to make a goblin object and to display it. 
             This will let the user see the current form state 
@@ -68,6 +82,13 @@ function App() {
           goblinFormHP, 
           setGoblinFormHP,
         */
+        submitGoblin={submitGoblin}
+        goblinFormName={goblinFormName} 
+        setGoblinFormName={setGoblinFormName}
+        goblinFormColor={goblinFormColor} 
+        setGoblinFormColor={setGoblinFormColor}
+        goblinFormHP={goblinFormHP} 
+        setGoblinFormHP={setGoblinFormHP}
       />
       <GoblinList 
         goblins={[]} // this takes in an array of goblins. If the filteredGoblins has a length, use that array. Otherwise, use the allGoblins array 
